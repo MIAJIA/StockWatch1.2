@@ -1,0 +1,3 @@
+com/logicmonitor/msp/dao/impl/DaoTest.class
+com/logicmonitor/msp/service/StockServiceTest.class
+com/logicmonitor/msp/YahooFetcher/DataFetcherTest.class
