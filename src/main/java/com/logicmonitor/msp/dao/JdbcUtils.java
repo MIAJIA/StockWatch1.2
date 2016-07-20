@@ -48,8 +48,8 @@ public final class JdbcUtils {
 				if (conn != null)
 					try {
 //						System.out.println("JUtils mydatasource free!");
-						conn.close();
-//												myDataSource.free(conn);
+//						conn.close();
+												myDataSource.free(conn);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

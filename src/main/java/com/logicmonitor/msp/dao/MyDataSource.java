@@ -10,12 +10,12 @@ import java.util.logging.Logger;
 import javax.sql.DataSource;
 
 public class MyDataSource implements DataSource{
-//	private static String url = "jdbc:mysql://localhost:8889/data?allowMultiQueries=true";
-//	private static String user = "root";
-//	private static String password = "123";
-	private static String url = "jdbc:mysql://us-cdbr-iron-east-03.cleardb.net/heroku_6073056c4088c94?reconnect=true&allowMultiQueries=true";
-	private static String user = "bc98a7f3cc2573";
-	private static String password = "58ed6fcf";
+	private static String url = "jdbc:mysql://localhost:8889/data?allowMultiQueries=true";
+	private static String user = "root";
+	private static String password = "root";
+//	private static String url = "jdbc:mysql://us-cdbr-iron-east-03.cleardb.net/heroku_6073056c4088c94?reconnect=true&allowMultiQueries=true";
+//	private static String user = "bc98a7f3cc2573";
+//	private static String password = "58ed6fcf";
 
 	private static int initCount = 2;
 	private static int maxCount = 10;
@@ -50,9 +50,15 @@ public class MyDataSource implements DataSource{
 		}
 	}
 
-//	public void free(Connection conn) {
-//		this.connectionsPool.addLast((MyConnection)conn);
-//	}
+	public void free(Connection conn) {
+		this.connectionsPool.addLast((MyConnection)conn);
+//		if (this.currentUserCount < this.maxUseCount)
+//			connectionsPool.addLast(conn);
+//		else {
+//			this.realConnection.close();
+//			this.dataSource.currentCount--;
+//		}
+	}
 
 	private MyConnection createConnection() throws SQLException {
 		Connection realConn = DriverManager.getConnection(url, user, password);

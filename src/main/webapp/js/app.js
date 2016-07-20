@@ -285,10 +285,12 @@
                 .ui([{
                     label: "Visualization Type",
                     method: "type",
-                    value: ["bar", "scatter", "line"]
+                    value: ["bar", "line"]
                 }])
-                .height(500)
-                .color("high")
+                .height(400)
+                .font({ "family": "Times" })
+                .color("#282F6B")
+
                 .format({
                     "text": function(text, params) {
                         if (text === "price") {

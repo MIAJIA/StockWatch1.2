@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Stock Monitor System | Mia Jia</title>
+    <title>Stock Watch System | Will Zhang</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/layout.css" type="text/css">
@@ -13,21 +13,19 @@
     <link href="assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
 </head>
 
-<body ng-app="StockMonitor">
+<body ng-app="StockMonitor" style="font-family: Times, TimesNR, 'New Century Schoolbook', Georgia,'New York', serif;">
     <div ng-controller="myController">
         <div id="content">
             <ul>
-                <div class="jumbotron">
+                <div>
                     <header id="header" class="clear">
                         <div id="hgroup">
-                            <h1>Stock Monitor</h1>
-                            <h4>Mia Jia</h4>
-                            <p>This project is based on <a href="http://financequotes-api.com/">Yahoo Finance API</a>, Java, Html, Css, D3JS, JQuery and AngularJS.</p>
-                            <br/>
+                            <h1>Stock Watch</h1>
+                            <h4>Chi Zhang</h4>
                         </div>
                     </header>
                 </div>
-                <div class="table-dataviz">
+                <div class="table-dataviz" bgcolor="#d0d0d0">
                     <form class="navbar-form navbar-left">
                         <div class="form-group nav">
                             <input type="text" class="form-control" ng-model="stockSymbol" placeholder="Type a stock symbol...">
@@ -45,7 +43,7 @@
                             </ul>
                         </div>
                 </div>
-                <div class="alert alert-danger navbar-text navbar-right" ng-show="alert">
+                <div class="alert alert- Market already closed at this time, realtime data is not available navbar-text navbar-right" ng-show="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <span>
                            You have already subscribed to this company</span>
@@ -85,10 +83,10 @@
                                     <td>{{stock.volume}}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="...">
-                                            <button type="button" class="btn btn-default" ng-click="getPeriodCompanyStockInfo('A_Week_'+stock.symbol)">RealTime</button>
-                                            <button type="button" class="btn btn-default" ng-click="getPeriodCompanyStockInfo('A_Month_'+stock.symbol)">Month</button>
-                                            <button type="button" class="btn btn-default" ng-click="getPeriodCompanyStockInfo('A_Year_'+stock.symbol)">Year</button>
-                                            <button type="button" class="btn btn-default" ng-click="deleteStock(stock.symbol)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                            <button type="button" class="btn btn-Primary" ng-click="getPeriodCompanyStockInfo('A_Week_'+stock.symbol)">RealTime</button>
+                                            <button type="button" class="btn btn-Primary" ng-click="getPeriodCompanyStockInfo('A_Month_'+stock.symbol)">Month</button>
+                                            <button type="button" class="btn btn-Primary" ng-click="getPeriodCompanyStockInfo('A_Year_'+stock.symbol)">Year</button>
+                                            <button type="button" class="btn btn-" ng-click="deleteStock(stock.symbol)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                                         </div>
                                     </td>
                                     </tr>

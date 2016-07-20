@@ -1,6 +1,7 @@
 package com.logicmonitor.msp.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.logicmonitor.msp.YahooFetcher.DataFetcher;
@@ -24,7 +25,8 @@ public class StockService {
 	public StockService() {
 		fetchData = new DataFetcher();
 		dao = new StockDaoJdbcImpl();
-		strList = new ArrayList<String>();
+//		strList = new ArrayList<String>();
+		strList = Collections.synchronizedList(new ArrayList<String>());
 		FirstRun = true;
 	}
 	
