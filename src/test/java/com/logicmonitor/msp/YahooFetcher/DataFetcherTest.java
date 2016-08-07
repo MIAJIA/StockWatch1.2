@@ -16,6 +16,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.logicmonitor.msp.dao.impl.StockDaoJdbcImpl;
 import com.logicmonitor.msp.domain.StockInfo;
+import com.logicmonitor.msp.domain.StockList;
 import com.logicmonitor.msp.domain.StockPrice;
 
 
@@ -71,7 +72,7 @@ public class DataFetcherTest {
 
 	@Test
 	public void test_GetRealTimeDataFromYahoo_Should_Return_Stock_List() {
-		List<String> stock_symbols = new ArrayList<String>();
+		StockList stock_symbols = new StockList();
 		stock_symbols.add(stock1_symbol);
 		stock_symbols.add(stock2_symbol);
 		List<StockPrice> myStockList = new ArrayList<StockPrice>();
@@ -86,7 +87,7 @@ public class DataFetcherTest {
 
 	@Test
 	public void test_GetRealTimeDataFromYahoo_Should_Return_Null() {
-		List<String> stock_symbols = new ArrayList<String>();
+		StockList stock_symbols = new StockList();
 		List<StockPrice> myStockList = new ArrayList<StockPrice>();
 		dataFetcher.getRealTimeDataFromYahoo(stock_symbols, myStockList);
 
@@ -110,7 +111,7 @@ public class DataFetcherTest {
 
 	@Test
 	public void test_GetDailyDataFromYahoo_Should_Return_Stock_List() {
-		List<String> stock_symbols = new ArrayList<String>();
+		StockList stock_symbols = new StockList();
 		stock_symbols.add(stock1_symbol);
 		stock_symbols.add(stock2_symbol);
 		List<StockPrice> myStockList = new ArrayList<StockPrice>();
@@ -125,7 +126,7 @@ public class DataFetcherTest {
 
 	@Test
 	public void test_GetDailyDataFromYahoo_Should_Return_Null() {
-		List<String> stock_symbols = new ArrayList<String>();
+		StockList stock_symbols = new StockList();
 		List<StockPrice> myStockList = new ArrayList<StockPrice>();
 		dataFetcher.getRealTimeDataFromYahoo(stock_symbols, myStockList);
 
@@ -134,7 +135,7 @@ public class DataFetcherTest {
 
 	@Test
 	public void test_GetWeeklyDataFromYahoo_Should_Return_Stock_List() {
-		List<String> stock_symbols = new ArrayList<String>();
+		StockList stock_symbols = new StockList();
 		stock_symbols.add(stock1_symbol);
 		stock_symbols.add(stock2_symbol);
 		List<StockPrice> myStockList = new ArrayList<StockPrice>();
@@ -149,7 +150,7 @@ public class DataFetcherTest {
 
 	@Test
 	public void test_GetWeeklyDataFromYahoo_Should_Return_Null() {
-		List<String> stock_symbols = new ArrayList<String>();
+		StockList stock_symbols = new StockList();
 		List<StockPrice> myStockList = new ArrayList<StockPrice>();
 		dataFetcher.getRealTimeDataFromYahoo(stock_symbols, myStockList);
 
@@ -157,7 +158,7 @@ public class DataFetcherTest {
 	}
 	@Test
 	public void test_updateWeeklyDataFromYahoo() {
-	    List<String> stock_symbols = new ArrayList<String>();
+		StockList stock_symbols = new StockList();
 	    stock_symbols.add(stock1_symbol);
 	    stock_symbols.add(stock2_symbol);
 	    List<StockPrice> myStockList = new ArrayList<StockPrice>();
@@ -169,7 +170,7 @@ public class DataFetcherTest {
 	
 	@Test
 	public void test_updateDailyDataFromYahoo() {
-	    List<String> stock_symbols = new ArrayList<String>();
+		StockList stock_symbols = new StockList();
 	    stock_symbols.add(stock1_symbol);
 	    stock_symbols.add(stock2_symbol);
 	    List<StockPrice> myStockList = new ArrayList<StockPrice>();

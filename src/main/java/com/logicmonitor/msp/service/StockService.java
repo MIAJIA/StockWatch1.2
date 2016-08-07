@@ -2,12 +2,15 @@ package com.logicmonitor.msp.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.logicmonitor.msp.YahooFetcher.DataFetcher;
 import com.logicmonitor.msp.dao.StockDao;
 import com.logicmonitor.msp.dao.impl.StockDaoJdbcImpl;
 import com.logicmonitor.msp.domain.StockInfo;
+import com.logicmonitor.msp.domain.StockList;
 import com.logicmonitor.msp.domain.StockPrice;
 
 /**
@@ -15,24 +18,38 @@ import com.logicmonitor.msp.domain.StockPrice;
  *
  */
 public class StockService {
+  private static StockService instance = null;
 	DataFetcher fetchData;
 	StockDao dao;
-	List<String> strList;
+	public StockList stockList;
 	boolean FirstRun;
 	TimeValidation timeValid = new TimeValidation();
 		
 	
-	public StockService() {
+	private StockService() {
 		fetchData = new DataFetcher();
 		dao = new StockDaoJdbcImpl();
 //		strList = new ArrayList<String>();
-		strList = Collections.synchronizedList(new ArrayList<String>());
+		stockList = new StockList();
 		FirstRun = true;
 	}
-	
+	public static StockService getInstance() {
+      if (instance == null) {
+          synchronized (StockService.class) {
+              if (instance == null) {
+                  instance = new StockService();
+              }
+          }
+      }
+      return instance;
+  }
+	public void delFromDB(String symbol){
+      stockList.remove(symbol);
+      dao.delAllFromDBDAO(symbol);
+  }
 	//add new stock to monitor
 	public void fetchAddNewtoDB(String symbol){
-		strList.add(symbol);
+		stockList.put(symbol, stockList.getOrDefault(symbol, 0) + 1);
 		RunnableFetchAddOneStockMonthLongDaily T1 = new RunnableFetchAddOneStockMonthLongDaily(symbol,fetchData, dao);
 		T1.start();
 		RunnableFetchAddOneStockYearLongWeekly T2 = new RunnableFetchAddOneStockYearLongWeekly(symbol,fetchData, dao);
@@ -41,13 +58,13 @@ public class StockService {
 		T3.start();
 		if (FirstRun == true) {
 			FirstRun = false;
-			this.fetchAddtoDB(strList);
+			this.fetchAddtoDB(stockList);
 		}
 	}
 	
 	
 	//update stock price regularly 
-	private void fetchAddtoDB(List<String> symbolList){
+	private void fetchAddtoDB(StockList symbolList){
 		RunnableFetchAddRealTime T1 = new RunnableFetchAddRealTime(symbolList,fetchData, dao);
 		T1.start();
 		RunnableFetchAddDaily T2 = new RunnableFetchAddDaily(symbolList,fetchData, dao);
@@ -205,11 +222,11 @@ public class StockService {
 		private Thread t;
 		private String threadName;
 		DataFetcher fetchData;
-		List<String> symbolList;
+		StockList symbolList;
 		StockDao dao;
 		List<StockPrice> stockPriceList;
 		
-		public RunnableFetchAddRealTime (List<String> symbolList, DataFetcher fetchData, StockDao dao) {
+		public RunnableFetchAddRealTime (StockList symbolList, DataFetcher fetchData, StockDao dao) {
 			this.symbolList = symbolList;
 			this.fetchData = fetchData;
 			this.dao = dao;
@@ -249,11 +266,11 @@ public class StockService {
 		private Thread t;
 		private String threadName;
 		DataFetcher fetchData;
-		List<String> symbolList;
+		StockList symbolList;
 		StockDao dao;
 		List<StockPrice> stockPriceList;
 		
-		public RunnableFetchAddWeekly (List<String> symbolList, DataFetcher fetchData, StockDao dao) {
+		public RunnableFetchAddWeekly (StockList symbolList, DataFetcher fetchData, StockDao dao) {
 			this.symbolList = symbolList;
 			this.fetchData = fetchData;
 			this.dao = dao;
@@ -294,11 +311,11 @@ public class StockService {
 		private Thread t;
 		private String threadName;
 		DataFetcher fetchData;
-		List<String> symbolList;
+		StockList symbolList;
 		StockDao dao;
 		List<StockPrice> stockPriceList;
 		
-		public RunnableFetchAddDaily (List<String> symbolList, DataFetcher fetchData, StockDao dao) {
+		public RunnableFetchAddDaily (StockList symbolList, DataFetcher fetchData, StockDao dao) {
 			this.symbolList = symbolList;
 			this.fetchData = fetchData;
 			this.dao = dao;

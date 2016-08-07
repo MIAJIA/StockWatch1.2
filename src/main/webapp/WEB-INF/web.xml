@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     <display-name>SMP</display-name>
+    <filter>
+    	<description>
+    	</description>
+    	<display-name>LoginFilter</display-name>
+    	<filter-name>LoginFilter</filter-name>
+    	<filter-class>com.logicmonitor.msp.filter.LoginFilter</filter-class>
+    </filter>
+    <filter>
+    	<description>
+    	</description>
+    	<display-name>htmlFilter</display-name>
+    	<filter-name>htmlFilter</filter-name>
+    	<filter-class>com.logicmonitor.msp.filter.htmlFilter</filter-class>
+    </filter>
+    <filter-mapping>
+    	<filter-name>LoginFilter</filter-name>
+    	<url-pattern>/LoginFilter</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+    	<filter-name>htmlFilter</filter-name>
+    	<url-pattern>/htmlFilter</url-pattern>
+    </filter-mapping>
     <servlet>
     	<description>
     	</description>
@@ -44,6 +66,41 @@
     	<servlet-name>addOneStockToService</servlet-name>
     	<servlet-class>com.logicmonitor.msp.servlet.addOneStockToService</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>UserLoginInfo</display-name>
+    	<servlet-name>UserLoginInfo</servlet-name>
+    	<servlet-class>com.logicmonitor.msp.servlet.UserLoginInfo</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>GetUserWatchList</display-name>
+    	<servlet-name>GetUserWatchList</servlet-name>
+    	<servlet-class>com.logicmonitor.msp.servlet.GetUserWatchList</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>DelOneStockUser</display-name>
+    	<servlet-name>DelOneStockUser</servlet-name>
+    	<servlet-class>com.logicmonitor.msp.servlet.DelOneStockUser</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>AddOneStockUser</display-name>
+    	<servlet-name>AddOneStockUser</servlet-name>
+    	<servlet-class>com.logicmonitor.msp.servlet.AddOneStockUser</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>UserLogout</display-name>
+    	<servlet-name>UserLogout</servlet-name>
+    	<servlet-class>com.logicmonitor.msp.servlet.UserLogout</servlet-class>
+    </servlet>
    
     <servlet-mapping>
     	<servlet-name>AllCompaniesInfo</servlet-name>
@@ -70,6 +127,26 @@
     	<servlet-name>addOneStockToService</servlet-name>
     	<url-pattern>/addOneStockToService</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>UserLoginInfo</servlet-name>
+    	<url-pattern>/UserLoginInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>GetUserWatchList</servlet-name>
+    	<url-pattern>/GetUserWatchList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>DelOneStockUser</servlet-name>
+    	<url-pattern>/DelOneStockUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>AddOneStockUser</servlet-name>
+    	<url-pattern>/AddOneStockUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>UserLogout</servlet-name>
+    	<url-pattern>/UserLogout</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -77,6 +154,7 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
+        <welcome-file>login.html</welcome-file>
         </welcome-file-list>
     </web-app>
     

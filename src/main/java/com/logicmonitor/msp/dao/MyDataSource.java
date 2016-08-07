@@ -106,7 +106,6 @@ public class MyDataSource implements DataSource{
 
 	@Override
 	public boolean isWrapperFor(Class<?> iface) throws SQLException {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.logicmonitor.msp.domain.StockInfo;
+import com.logicmonitor.msp.domain.StockList;
 import com.logicmonitor.msp.domain.StockPrice;
 import com.logicmonitor.msp.service.TimeValidation;
 import com.mysql.jdbc.StringUtils;
@@ -99,7 +100,7 @@ public class DataFetcher {
 	}
 
 	// update all stock's year long weekly stock price information from YahooAPI 
-	public void updateWeeklyDataFromYahoo(List<String> symbols, List<StockPrice> myStockList) {
+	public void updateWeeklyDataFromYahoo(StockList symbols, List<StockPrice> myStockList) {
 		if(symbols.size() == 0) return;
 		String[] symbolsArr = symbols.toArray(new String[symbols.size()]);
 		Map<String, Stock> yStocks = null;
@@ -132,7 +133,7 @@ public class DataFetcher {
 	}
 
 	// update all stock's month long daily stock price information from YahooAPI 
-	public void updateDailyDataFromYahoo(List<String> symbols, List<StockPrice> myStockList) {
+	public void updateDailyDataFromYahoo(StockList symbols, List<StockPrice> myStockList) {
 		if(symbols.size() == 0) return;
 		String[] symbolsArr = symbols.toArray(new String[symbols.size()]);
 		Map<String, Stock> yStocks = null;
@@ -167,7 +168,7 @@ public class DataFetcher {
 	}
 
 	// get all stocks' real time stock price information from YahooAPI 
-	public void getRealTimeDataFromYahoo(List<String> symbols, List<StockPrice> myStockList ) {  
+	public void getRealTimeDataFromYahoo(StockList symbols, List<StockPrice> myStockList ) {  
 		if(!timeValid.isValidate()) return;
 		if(symbols.size() == 0) return;
 		Map<String, Stock> yStocks = null;

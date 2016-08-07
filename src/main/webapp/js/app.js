@@ -3,6 +3,18 @@
     'use strict';
 
     var app = angular.module("StockMonitor", []);
+    // app.config(function($routeProvider) {
+    //     $routeProvider
+    //         .when("/SMP", {
+    //             templateUrl: "index.html",
+    //             controller: 'myController'
+    //         })
+    //         .when("/login.html", {
+    //             templateUrl: "login.html",
+    //             controller: 'myController'
+    //         });
+    // });
+
     app.controller("myController", ['$scope', '$http', '$location', '$q', '$log', function($scope, $http, $location, $q, $log) {
 
         var vm = this;
@@ -12,29 +24,38 @@
         $scope.addStock = addStock;
         $scope.deleteStock = deleteStock;
         $scope.updateChart = updateChart;
+        $scope.userLogin = userLogin;
+        $scope.userLogout = userLogout;
         $scope.alert = false;
         $scope.marketClose = false;
         $scope.predicate = 'id';
         $scope.repeatHandle;
         $scope.interval = 5000;
         $scope.stockSymbol;
+        $scope.userInfo;
+        // $scope.userInfo.email ;
+        // $scope.userInfo.password ;
         var visualization;
+
+
 
         $scope.history_price = [];
 
         init();
 
-        $scope.order = function(x) {
-            $scope.myOrderBy = x;
-        }
+        // $scope.order = function(x) {
+        //     $scope.myOrderBy = x;
+        // }
+        // $scope.go = function(path) {
+        //     $location.path(path);
+        // };
 
         //set update frequency
         // function init() {
         //     setInterval(updatePrice, 5000);
         // }
         function init() {
-            console.log("initing....");
-
+            // console.log("initing....");
             $scope.repeatHandle = setInterval(updatePrice, 5000);
             setNextTimer();
         }
@@ -47,20 +68,36 @@
                 $scope.marketClose = true;
                 clearInterval($scope.repeatHandle);
                 setTimeout(function() { startUpdate(); }, timeoutSec);
-                console.log("Market is closed!");
+                // console.log("Market is closed!");
             } else { // it's open
                 $scope.marketClose = false;
                 setTimeout(function() { pauseUpdate(); }, -timeoutSec);
-                console.log("Market is open!");
+                // console.log("Market is open!");
             }
         }
 
         function startUpdate() {
             console.log("startUpdate");
             $scope.repeatHandle = setInterval(updatePrice, 5000);
-            console.log("startUpdate setNextTimer");
+            // console.log("startUpdate setNextTimer");
             setNextTimer();
         }
+        // function changecolors() {
+        //     x = 1;
+        //     setInterval(change, 5000);
+        // }
+
+        // function change() {
+        //     if (x === 1) {
+        //         color = "red";
+        //         x = 2;
+        //     } else {
+        //         color = "green";
+        //         x = 1;
+        //     }
+
+        //     document.body.style.background = color;
+        // }
 
         function pauseUpdate() {
             clearInterval($scope.repeatHandle);
@@ -256,6 +293,82 @@
             );
         };
 
+        //???????
+
+        //delete one stock form db
+        function userLogin() {
+            console.log("initing login....");
+            // var data = $.param({
+            //     username: $scope.userInfo.email,
+            //     password: $scope.userInfo.password
+            // });
+            $http.get('UserLoginInfo', { responseType: 'json', 
+                params:{"username": $scope.userInfo.email, "password": $scope.userInfo.password}})
+            .then(
+                function(res) {
+                    $('#loginform').css({ 'display': 'none' });
+                    $(".welcome").css({ 'display': 'block' });
+
+                    $(location).attr('href', 'index.html')
+
+                    console.log("login success!");
+                },
+                function(err) {
+                    $(".login").css({ 'display': 'block' });
+                    console.log("login error.");
+                }
+            );
+        }
+               
+
+        function userLogout() {
+            $http.get('userLogout', { responseType: 'json', params: { user: $scope.userInfo.email } }).then(
+                function(res) {
+                    $(".welcome").css({ 'display': 'block' });
+                    console.log("login success!");
+                },
+                function(err) {
+                    $(".login").css({ 'display': 'block' });
+                    console.log("login error.");
+                }
+            );
+        }
+
+
+        // $(document).mouseup(function(e) {
+        //     var container = $(".wrap");
+
+        //     if (!container.is(e.target) // if the target of the click isn't the container...
+        //         && container.has(e.target).length === 0) // ... nor a descendant of the container
+        //     {
+        //         // container.hide();
+        //         $('#navthing').hide();
+        //         $('#loginform').removeClass('green');
+        //     }
+        // });
+
+        // $(document).mouseup(function(e) {
+        //     var container = $(".wrap");
+
+        //     if (!container.is(e.target) // if the target of the click isn't the container...
+        //         && container.has(e.target).length === 0) // ... nor a descendant of the container
+        //     {
+        //         // container.hide();
+        //         $('#navthing').hide();
+        //         $('#loginform').removeClass('green');
+        //     }
+        // });
+        // $('input[type="submit"]').mousedown(function() {
+        //     $(this).css('background', '#2ecc71');
+        // });
+        // $('input[type="submit"]').mouseup(function() {
+        //     $(this).css('background', '#1abc9c');
+        // });
+
+        // $('#loginform').click(function() {
+        //     $('.login').fadeToggle('slow');
+        //     $(this).toggleClass('green');
+        // });
 
         function updateChart() {
             if (typeof visualization !== "undefined") {
@@ -278,8 +391,8 @@
                 .y("high") // key to use for y-axis
                 .x({
                     value: "timestamp",
-                    label: "Date"
-                }) //// key to use for x-axis
+                    label: "Time"
+                })
                 .time("timestamp") //{ "format": "%Y-%m-%d", "value": "timestamp" }
                 .tooltip(["high", "low", "open", "close", "timestamp", "price"])
                 .ui([{
@@ -289,8 +402,6 @@
                 }])
                 .height(400)
                 .font({ "family": "Times" })
-                .color("#282F6B")
-
                 .format({
                     "text": function(text, params) {
                         if (text === "price") {
@@ -312,13 +423,13 @@
                 })
                 .title("Logic Stock Monitor")
                 .title({
-                    "sub": "realtime stock monitor system"
+                    "sub": "Realtime Stock Monitor System"
                 })
                 .footer({
-                    "link": "https://www.linkedin.com/in/miajia",
+                    "link": "https://www.linkedin.com/in/will-zhang-b5194411b?trk=hp-identity-name",
                     "value": "Click here to find me"
                 })
-                .draw()
+                .draw();
         }
 
     }]);
