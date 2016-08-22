@@ -26,7 +26,7 @@ public class StockService {
   private  ScheduledExecutorService scheduExec;
   DataFetcher fetchData;
   StockDao dao;
-  StockList stockList;
+  public StockList stockList;
   boolean initRun;
 
   /**
@@ -220,4 +220,9 @@ public class StockService {
       }
     },0,1000 * 60 * 60 * 24 * 7,TimeUnit.MILLISECONDS);
   }
+
+public void delFromDB(String string) {
+	// TODO Auto-generated method stub
+	
+}
 }
