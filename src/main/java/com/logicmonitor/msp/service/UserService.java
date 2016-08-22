@@ -27,18 +27,11 @@ public class UserService {
     return instance;
 }
   public User checkLogin(String username, String password) {
-//    System.out.println("checkLogin" + udi.findUserByAccountAndPsw(username, password));
     return udi.findUserByAccountAndPsw(username, password);
-//    if (returnPassword == null) return false;
-//    if (!userList.containsKey(username)) {
-//      User curUser = new User(username);
-//      userList.put(username, curUser);
-//    } 
-//    return returnPassword.equals(password);
   }
-//  public void logout(String username) {
-//    userList.remove(username);
-//  }
+  public void logout(String username) {
+    userList.remove(username);
+  }
   
 
   public void addOneToWatchList(String username, String symbol) {

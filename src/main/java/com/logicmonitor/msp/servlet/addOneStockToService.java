@@ -23,18 +23,26 @@ public class addOneStockToService extends HttpServlet {
 		int queryIdx = request.getQueryString().indexOf("=");
 		String queryAdd = request.getQueryString().substring(queryIdx+1, request.getQueryString().length());
 		String[] querys = queryAdd.split("_");
+//	   String username = request.getParameter("username");
+//	    String symbol = request.getParameter("symbol"); 
 		if(querys != null) {	
 		    StockService ss = StockService.getInstance();
 		    UserService us = UserService.getInstance();
 		    if (querys.length == 1) {
 	            ss.fetchAddNewtoDB(queryAdd);
 		    } else {
-//		      User curUser = us.userList.get(querys[0]);
-		      if (!ss.stockList.contains(querys[1])) {
-		        ss.fetchAddNewtoDB(queryAdd);
-		        ss.stockList.add(querys[1]);
-		      }
-		      us.addOneToWatchList(querys[0], querys[1]);
+		      User curUser = us.userList.get(querys[0]);
+		      String symbol = querys[1];
+		      if (!ss.stockList.contains(symbol)) {
+                ss.fetchAddNewtoDB(symbol);
+                ss.stockList.add(symbol);
+              }
+              us.addOneToWatchList(querys[0], symbol);
+//		      if (!ss.stockList.contains(symbol)) {
+//		        ss.fetchAddNewtoDB(symbol);
+//		        ss.stockList.add(symbol);
+//		      }
+//		      us.addOneToWatchList(username, symbol);
 		    }
 		    response.setStatus(response.SC_OK);
 		} else {

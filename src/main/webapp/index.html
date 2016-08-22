@@ -18,75 +18,66 @@
 </head>
 
 <body ng-app="StockMonitor" style="font-family: Times, TimesNR, 'New Century Schoolbook', Georgia,'New York', serif;">
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="home active"><a href="/SMP">Stock Watch</a></li>
-                    <li class="videos"><a href="/videos">Videos</a></li>
-                    <li class="about"><a href="/about">About</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.html" class="wrap" id="loginform">Login</a>
-                        <div class="welcome" style="display: none;">hi, {{userInfo.email}}</div>
-                    </li>
-                    <li><a href="#" class="register">Sign Up</a></li>
-                    <li><a href="#" class="logoutform">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!--  <nav class="navbar navbar-static-top navbar-dark bg-inverse">
-        <h2><a class="navbar-brand">Stock Watch</a></h2>
-        <ul class="nav navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="wrap" href="#" id="loginform">Login</a>
-                <div class="welcome" style="display: none;">hi, {{userInfo.email}}</div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="logoutform">Logout</a>
-            </li>
-        </ul>
-    </nav> -->
-    <!-- <div class="wrap" style="display: none;">
-        <div id="regbar">
-            <div id="navthing">
-                <div class="loginsubmit">
-                    <div class="arrow-up"></div>
-                    <div class="formholder">
-                        <div class="randompad">
-                            <fieldset>
-                                <label name="email">Email</label>
-                                <input type="text" placeholder="example@example.com" ng-model="userInfo.email" />
-                                <br/>
-                                <label name="password">Password</label>
-                                <input type="password" ng-model="userInfo.password" />
-                                <input type="submit" value="Login" ng-click="userLogin()" />
-                            </fieldset>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div ng-controller="myController">
-        <div id="content">
-            <ul>
-                <div>
-                    <header id="header" class="clear">
-                        <div id="hgroup">
-                            <!--  <h1>Stock Watch</h1>
-                            <h4>Chi Zhang</h4> -->
-                        </div>
-                        <!-- Main Form -->
-                    </header>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="home active"><a href="#"><b>Stock Watch</b></a></li>
+                        <li class="videos"><a href="/videos">Videos</a></li>
+                        <li class="about"><a href="/about">About</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" id="loginform">Login</a>
+                            <a href="#" class="welcome" style="display: none; color: blue;">hi, {{userInfo.email}}</a>
+                        </li>
+                        <!-- <li><a href="login.html" class="wrap" id="loginform">Login</a>
+                            <div class="welcome" style="display: none;">hi, {{userInfo.email}}</div>
+                        </li> -->
+                        <li><a href="#" class="register">Sign Up</a></li>
+                        <li><a href="#" class="logoutform">Logout</a></li>
+                    </ul>
                 </div>
+            </div>
+        </nav>
+        <div id="needlogin" class="content">
+            <div class="container" >
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4 col-lg-4">
+                        <section class="register-login-box">
+                            <div class="register-login-box-body">
+                                <form id="login-form" class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="login-email">Username</label>
+                                        <div class="col-sm-8">
+                                            <input type="email" ng-model="userInfo.email" id="login-email" name="login[username]" placeholder="example@domain.com" value="" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="login-password">Password</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" id="login-password" ng-model="userInfo.password" name="login[password]" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-4 col-sm-8">
+                                            <button name="send" class="btn btn-lg btn-block btn-proceed-login" ng-click="userLogin()">Login</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+            </div>
+        </div>
+        <div id="logined" class="content">
+            <ul>
+                    <header id="header" class="clear">
+                        <div id="hgroup"> </div>
+                    </header>
                 <div class="table-dataviz" bgcolor="#d0d0d0">
                     <form class="navbar-form navbar-left">
                         <div class="form-group nav">
@@ -94,8 +85,6 @@
                         </div>
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary btn-group" ng-click="addStock(stockSymbol)">Find</button>
-                            <!--                         <div class="dropdown nav">
- -->
                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -108,58 +97,55 @@
                 <div class="alert alert- Market already closed at this time, realtime data is not available navbar-text navbar-right" ng-show="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <span>
-                           You have already subscribed to this company</span>
+                       You have already subscribed to this company</span>
                 </div>
                 <div class="alert alert-warning navbar-text navbar-right" ng-show="marketClose"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                     <span>Market already closed at this time, realtime data is not available</div>
+                </form>
+                <div>
 
-                    </form>
-
-
-
-                    <div>
-
-                 <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th data-field="Symbol">Symbol</th>
-                                    <th data-field="company_name">Company Name</th>
-                                    <th data-field="stock_exchange and currency">Exchange | Currency</th>
-                                    <th data-field="price">Price</th>
-                                    <th data-field="range">Range</th>
-                                    <th data-field="openc">Open</th>
-                                    <th data-field="close">Previous Close</th>
-                                    <th data-field="volume">Volume</th>
-                                    <th data-field="action" data-formatter="actionFormatter" data-events="actionEvents">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="stock in stockArr | filter:stockSymbol | orderBy:myOrderBy">
-                                    <td>{{stock.symbol | uppercase}}</td>
-                                    <td>{{stock.name}}</td>
-                                    <td class="blink">{{stock.stockExchange}} | {{stock.currency}}</td>
-                                    <td class="blink">{{stock.price | currency }}</td>
-                                    <td class="blink">{{stock.low | currency}}-{{stock.high | currency }}</td>
-                                    <td class="blink">{{stock.open | currency }}</td>
-                                    <td class="blink">{{stock.close | currency }}</td>
-                                    <td class="blink">{{stock.volume}}</td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="...">
-                                            <button type="button" class="btn btn-Primary" ng-click="getPeriodCompanyStockInfo('A_Week_'+stock.symbol)">RealTime</button>
-                                            <button type="button" class="btn btn-Primary" ng-click="getPeriodCompanyStockInfo('A_Month_'+stock.symbol)">Month</button>
-                                            <button type="button" class="btn btn-Primary" ng-click="getPeriodCompanyStockInfo('A_Year_'+stock.symbol)">Year</button>
-                                            <button type="button" class="btn btn-" ng-click="deleteStock(stock.symbol)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+             <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th data-field="Symbol">Symbol</th>
+                                <th data-field="company_name">Company Name</th>
+                                <th data-field="stock_exchange and currency">Exchange | Currency</th>
+                                <th data-field="price">Price</th>
+                                <th data-field="range">Range</th>
+                                <th data-field="openc">Open</th>
+                                <th data-field="close">Previous Close</th>
+                                <th data-field="volume">Volume</th>
+                                <th data-field="action" data-formatter="actionFormatter" data-events="actionEvents">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stock in stockArr | filter:stockSymbol | orderBy:myOrderBy">
+                                <td>{{stock.symbol | uppercase}}</td>
+                                <td>{{stock.name}}</td>
+                                <td class="blink">{{stock.stockExchange}} | {{stock.currency}}</td>
+                                <td class="blink">{{stock.price | currency }}</td>
+                                <td class="blink">{{stock.low | currency}}-{{stock.high | currency }}</td>
+                                <td class="blink">{{stock.open | currency }}</td>
+                                <td class="blink">{{stock.close | currency }}</td>
+                                <td class="blink">{{stock.volume}}</td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <button type="button" class="btn btn-Primary" ng-click="getPeriodCompanyStockInfo('A_Week_'+stock.symbol)">RealTime</button>
+                                        <button type="button" class="btn btn-Primary" ng-click="getPeriodCompanyStockInfo('A_Month_'+stock.symbol)">Month</button>
+                                        <button type="button" class="btn btn-Primary" ng-click="getPeriodCompanyStockInfo('A_Year_'+stock.symbol)">Year</button>
+                                        <button type="button" class="btn btn-" ng-click="deleteStock(stock.symbol)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                 </div>
                 </td>
                 </tr>
                 </tbody>
                 </table>
+                <h2></h2>
+                <div id="StockView" width="500" height="1000"></div>
         </div>
-        <h2></h2>
-        <div id="StockView" width="500" height="1000"></div>
-        <!-- end: row -->
-    </div>
-    </ul>
+            
+            <!-- end: row -->
+        </div>
+        </ul>
     </div>
     <!-- content -->
 </body>

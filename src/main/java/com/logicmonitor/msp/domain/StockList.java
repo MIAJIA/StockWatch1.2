@@ -31,6 +31,16 @@ public class StockList {
   }
     return strings;
   }
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    for (Entry<String, Integer> entry : stockList.entrySet()) {
+      String key = entry.getKey();
+      sb.append(key).append("|");
+//      stockList.remove(); // avoids a ConcurrentModificationException
+  }
+    return sb.toString();
+  }
+  
   public boolean contains(String string) {
     return stockList.containsKey(string);
   }

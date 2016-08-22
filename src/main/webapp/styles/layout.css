@@ -1,7 +1,7 @@
 /*article{display:block; margin:10; padding:10;}
 */
 
-#content{ margin: auto;
+.content{ margin: auto;
     width: 90%;
     padding: 10px;
     margin: 80px 80px 80px 80px;
@@ -44,6 +44,9 @@
   display: none;
 }
 */
+#logined {
+  display: none;
+}
 .arrow-up {
   width: 0;
   height: 0;

@@ -306,10 +306,11 @@
                 params:{"username": $scope.userInfo.email, "password": $scope.userInfo.password}})
             .then(
                 function(res) {
+                    $('#needlogin').css({ 'display': 'none' });
                     $('#loginform').css({ 'display': 'none' });
                     $(".welcome").css({ 'display': 'block' });
-
-                    $(location).attr('href', 'index.html')
+                    $('#logined').css({ 'display': 'block' });
+                    // $(location).attr('href', 'index.html')
 
                     console.log("login success!");
                 },

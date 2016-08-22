@@ -169,7 +169,7 @@ public class DataFetcher {
 
 	// get all stocks' real time stock price information from YahooAPI 
 	public void getRealTimeDataFromYahoo(StockList symbols, List<StockPrice> myStockList ) {  
-		if(!timeValid.isValidate()) return;
+		if(!TimeValidation.isValidate()) return;
 		if(symbols.size() == 0) return;
 		Map<String, Stock> yStocks = null;
 		try {
